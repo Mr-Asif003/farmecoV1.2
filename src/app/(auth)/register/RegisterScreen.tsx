@@ -1,226 +1,191 @@
-import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Touchable, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Camera, Mails, LockKeyhole,MoveRight,Key } from 'lucide-react-native';
+import { Redirect, router } from 'expo-router';
 
-interface FormData {
-  mobileNumber: string;
-  password: string;
-  confirmPassword: string;
-}
 
-const SignUpScreen: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    mobileNumber: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const handleSubmit = () => {
-    console.log(formData);
-  };
-
+const RegisterScreen = () => {
+  
   return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === "ios" ? "padding" : "height"} 
-      style={styles.container}
-    >
-      <ScrollView 
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
-        <View style={styles.screenContainer}>
-          <View style={styles.headerContainer}>
-            <Image
-              resizeMode="cover"
-              source={{ uri: "https://cdn.builder.io/api/v1/image/assets/83afeb780dc441af807c431aa781a66c/1ab56648d11a2e67fc42e67c2a2a8ea1d50a8d1c02af034805db773f51471eb9?apiKey=83afeb780dc441af807c431aa781a66c&" }}
-              style={styles.headerImage}
-              accessible={true}
-              accessibilityLabel="Farmeco logo"
-            />
-            <Text style={styles.headerText}>Farmeco</Text>
-          </View>
-
-          <View style={styles.contentContainer}>
-            <Text style={styles.formTitle}>Create an account</Text>
-
-            <View style={styles.inputContainer}>
-              <Image
-                resizeMode="contain"
-                source={{ uri: "https://cdn.builder.io/api/v1/image/assets/83afeb780dc441af807c431aa781a66c/70c1aea324cc5d56a74650a4c1503063ad0bccde01affe7cf89eedf10ef58ba6?apiKey=83afeb780dc441af807c431aa781a66c&" }}
-                style={styles.inputIcon}
-                accessible={true}
-                accessibilityLabel="Mobile number icon"
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Mobile Number"
-                placeholderTextColor="rgba(196, 187, 184, 1)"
-                value={formData.mobileNumber}
-                onChangeText={(text) => setFormData({ ...formData, mobileNumber: text })}
-                accessible={true}
-                accessibilityLabel="Enter your mobile number"
-                testID="mobile-input"
-                keyboardType="phone-pad"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <Image
-                resizeMode="contain"
-                source={{ uri: "https://cdn.builder.io/api/v1/image/assets/83afeb780dc441af807c431aa781a66c/73a9a94128b62a278e7c888c6293c1bc590582956db78c7374cdf3abb8efd54e?apiKey=83afeb780dc441af807c431aa781a66c&" }}
-                style={styles.inputIcon}
-                accessible={true}
-                accessibilityLabel="Password icon"
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                placeholderTextColor="rgba(196, 187, 184, 1)"
-                value={formData.password}
-                onChangeText={(text) => setFormData({ ...formData, password: text })}
-                secureTextEntry
-                accessible={true}
-                accessibilityLabel="Enter your password"
-                testID="password-input"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <Image
-                resizeMode="contain"
-                source={{ uri: "https://cdn.builder.io/api/v1/image/assets/83afeb780dc441af807c431aa781a66c/73a9a94128b62a278e7c888c6293c1bc590582956db78c7374cdf3abb8efd54e?apiKey=83afeb780dc441af807c431aa781a66c&" }}
-                style={styles.inputIcon}
-                accessible={true}
-                accessibilityLabel="Confirm password icon"
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Confirm password"
-                placeholderTextColor="rgba(196, 187, 184, 1)"
-                value={formData.confirmPassword}
-                onChangeText={(text) => setFormData({ ...formData, confirmPassword: text })}
-                secureTextEntry
-                accessible={true}
-                accessibilityLabel="Confirm your password"
-                testID="confirm-password-input"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}
-              accessible={true}
-              accessibilityLabel="Continue with sign up"
-              accessibilityRole="button"
-              testID="submit-button"
-            >
-              <Text style={styles.submitButtonText}>Continue</Text>
-            </TouchableOpacity>
-
-            <Image
-              resizeMode="contain"
-              source={{ uri: "https://cdn.builder.io/api/v1/image/assets/83afeb780dc441af807c431aa781a66c/ea8d7a004687a3294bb59e0bcb07a7fbe4fb175d46aa8ab54459d79806ad973a?apiKey=83afeb780dc441af807c431aa781a66c&" }}
-              style={styles.footerImage}
-              accessible={true}
-              accessibilityLabel="Decorative footer image"
-            />
-          </View>
+    <View style={styles.container}>
+      <View style={styles.heroContainer}></View>
+      <View style={styles.loginContainer}>
+        {/* <Camera color="red" size={48} /> */}
+        <View style={styles.topHeading}>
+          <Text style={styles.helloTxt}>Create an account</Text>
+          
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  );
-};
+        <View style={styles.inputContainer}>
+          {/* //email */}
+          <View style={styles.txtView}>
+            <Mails color="#C5C5C5" />
+            <TextInput placeholder='Enter Your email' style={styles.txtInput} />
+          </View>
+
+
+          {/* password */}
+          <View style={styles.txtView}>
+          <LockKeyhole color="#C5C5C5" />
+            <TextInput placeholder='Password' style={styles.txtInput} />
+          </View>
+
+
+          {/* confirm password */}
+          <View style={styles.txtView}>
+            <LockKeyhole color="#C5C5C5" />
+            <TextInput placeholder='Confirm Password' style={styles.txtInput} />
+          </View>
+
+          {/* continue btn */}
+           <TouchableOpacity style={styles.continuebtn}>
+            <Text style={styles.continuetxt} onPress={()=>router.replace('./UserRegisterDetails')}>Continue  </Text>
+            
+           </TouchableOpacity>
+           {/* select postion */}
+           <View style={styles.selectContainer}>
+          <TouchableOpacity style={styles.login}  onPress={()=>router.replace('/(auth)/login/LoginScreen')}><Text style={styles.logintxt}>Login</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.Register} onPress={()=>router.replace('/(auth)/register/RegisterScreen')}><Text style={styles.registertxt}>Register</Text></TouchableOpacity>
+        </View>
+        </View>
+        
+      </View>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    display: 'flex',
+   backgroundColor: '#AFF1E5'
   },
-  scrollContent: {
-    flexGrow: 1,
+  loginContainer: {
+    position: 'relative',
+    display: 'flex',
+    height: '70%',
+    backgroundColor: '#28Ac60',
+
+    shadowColor: 'black',
+    shadowOffset: { width: 100, height: 100 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    elevation: 10,
+    margin: 0
+
+
   },
-  screenContainer: {
-    flex: 1,
-    marginHorizontal: 'auto',
-    maxWidth: 480,
+  heroContainer: {
+    position: 'relative',
+    display: 'flex',
+    height: '30%',
+
+  },
+  topHeading: {
     width: "100%",
-    alignItems: "stretch",
-  },
-  headerContainer: {
-    alignItems: 'center',
-    paddingTop: 17,
-    paddingBottom: 20,
-  },
-  headerImage: {
-    width: 293,
-    aspectRatio: 0.96,
-    maxWidth: "100%",
-  },
-  headerText: {
-    fontFamily: "Aoboshi One",
-    fontSize: 32,
-    color: "rgba(0, 0, 0, 1)",
-    marginTop: 10,
-  },
-  contentContainer: {
-    borderRadius: 30,
-    paddingTop: 68,
-    paddingBottom: 35,
-    paddingHorizontal: 26,
-    alignItems: "center",
-  },
-  formTitle: {
-    color: "rgba(247, 241, 246, 1)",
-    fontSize: 32,
-    marginBottom: 20,
-    fontFamily: "Archivo Black",
-  },
-  inputContainer: {
-    borderRadius: 20,
-    borderColor: "rgba(40, 172, 96, 0.8)",
-    borderStyle: "solid",
-    borderWidth: 1,
     display: "flex",
-    width: "100%",
-    maxWidth: 322,
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    justifyContent: 'center',
+    alignItems: "center"
+  },
+  helloTxt: {
+    fontSize: 32,
+    fontWeight: '500',
+    color: 'white',
+    marginTop:5,
+  },
+  createAcc: {
+    fontSize: 15,
+    fontWeight: '500'
+  },
+  txtView: {
+    backgroundColor: 'white',
+    width: "85%",
+    elevation: 1,
+    borderRadius: 15,
+    marginTop: '4%',
+    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 6,
-    backgroundColor: 'transparent',
+    padding: 5
   },
-  inputIcon: {
-    width: 27,
-    aspectRatio: 1,
-    marginRight: 20,
+  txtInput: {
+    height: 43,
+    color: 'green'
   },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: "rgba(196, 187, 184, 1)",
-    fontFamily: "Archivo Black",
-  },
-  submitButton: {
-    borderRadius: 100,
-    backgroundColor: 'rgba(40, 172, 96, 0.8)',
-    marginTop: 49,
-    width: 161,
-    paddingVertical: 18,
-    alignItems: 'center',
-  },
-  submitButtonText: {
-    fontSize: 20,
-    color: "rgba(255, 255, 255, 0.8)",
-    fontFamily: "Archivo Black",
-  },
-  footerImage: {
-    width: 52,
-    aspectRatio: 1.45,
-    marginTop: 157,
-  },
-});
+  inputContainer: {
+    display: 'flex',
+    justifyContent: 'center',
 
-export default SignUpScreen;
+    alignItems: 'center'
+  },
+continuebtn:{
+  marginTop:'9%',
+ height:38,
+ width:120,
+ backgroundColor:'#1E7F47',
+ borderRadius:20,
+ display:'flex',
+ flexDirection:'row',
+ justifyContent:'center',
+ alignItems:'center',
+ elevation:1
+},
+continuetxt:{
+color:'white',
+fontWeight:'600',
+fontSize:16
+},
+selectContainer:{
+  position:'relative',
+  marginTop:'15%',
+  backgroundColor:'white',
+  width:250,
+  height:40,
+  display:'flex',
+  flexDirection:'row',
+  alignItems:'center',
+  justifyContent:'space-between',
+  borderRadius:10,
+  elevation:1
+},
+login:{
+  
+   width:124,
+   height:40,
+  display:'flex',
+  flexDirection:'row',
+  alignItems:'center',
+  justifyContent:'center',
+
+  
+},
+logintxt:{
+  // color:'red',
+  // fontWeight:'900',
+  // fontSize:16
+},
+registertxt:{
+  color:'white',
+  fontWeight:'700',
+  fontSize:16
+},
+
+Register:{
+  backgroundColor:'#1E7F47',
+   
+  width:124,
+  height:40,
+ display:'flex',
+ flexDirection:'row',
+ alignItems:'center',
+ justifyContent:'center',
+ borderRadius:10,
+ elevation:1,
+}
+
+
+
+})
+
+export default RegisterScreen;

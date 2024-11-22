@@ -12,35 +12,42 @@ const index = () => {
   const slides = [
     {
       key: 1,
-      title: 'Title 1',
-      text: 'Description.\nSay something cool',
-      image: require('../../assets/images/favicon.png'),
+      title: 'Welcome to FarmEco',
+      text: 'A place where you can Buy or Sell Crpos',
+      image: require('../../assets/images/introman1.png'),
       backgroundColor: '#59b2ab',
     },
     {
       key: 2,
       title: 'Title 2',
       text: 'Other cool stuff',
-      image: require('../../assets/images/favicon.png'),
+      image: require('../../assets/images/introman2.png'),
       backgroundColor: '#febe29',
     },
     {
       key: 3,
       title: 'Rocket guy',
       text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-      image: require('../../assets/images/favicon.png'),
+      image: require('../../assets/images/introman3.png'),
       backgroundColor: '#22bcb5',
     }
   ];
 
   const renderSlide = ({ item }) => {
     return (
-      <View style={styles.slide}>
-        <Text>{item.title}</Text>
-        <Image source={item.image} style={styles.imageStyle} />
-        <Text >{item.text}</Text>
+      <ImageBackground source={require('../../assets/images/introbg1.png')} resizeMode="cover"  style={styles.slide}>
 
+      <View style={styles.imagesliderContainer}>
+      <Image source={item.image} style={styles.imageStyle} />
       </View>
+
+      <View style={styles.textContainer}>
+        <Text style={styles.Headingtxt}>{item.title}</Text>
+        <Text style={styles.descriptiontxt} >{item.text}</Text>
+      </View>
+
+      
+      </ImageBackground>
     )
   }
   const _onDone = () => {
@@ -48,14 +55,14 @@ const index = () => {
   }
 
   return (
-    <ScrollView>
+    
       <View style={styles.container} >
         {
           showSlider ? <AppIntroSlider data={slides} renderItem={renderSlide} onDone={_onDone} /> :<Redirect href={'./select'}/>
           
         }
       </View>
-    </ScrollView>
+    
   )
 }
 
@@ -63,7 +70,6 @@ export default index
 
 const styles = StyleSheet.create({
   container: {
-   
     flex: 1,
     height:'100%',
     backgroundColor: 'yellow',
@@ -72,44 +78,48 @@ const styles = StyleSheet.create({
   },
 
   imageStyle: {
-    width:'50%',
-    height:'50%',
+    marginTop:'11%',
+    width:'100%',
+    height:'100%',
     aspectRatio: 1,
-    borderRadius: 20,
-    marginLeft: 26,
-    marginTop: 100
+   resizeMode:'contain'
   },
 
   slide: {
-    flex: 1,
-    display: 'flex',
-    backgroundColor: 'yellow',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  ImageText: {
+   position:'absolute',
+   height:'100%',
+   width:'100%',
+   display:'flex',
+   alignItems:'center',
 
   },
-  afterIntroContainer: {
-    display: 'flex',
-    flexDirection:'column',
-    flex: 1,
-    height: '100%',
-    backgroundColor: 'yellow',
+  imagesliderContainer:{
+    padding:20,
+    height:'60%'
   },
-  image: {
-
+  textContainer:{
+    padding:20,
+    height:'40%',
+    display:'flex',
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
   },
-  topview:{ 
-    height:'60%',
-    backgroundColor:'aqua',
+  Headingtxt:{
+    fontSize:35,
+    fontWeight:'700',
+   
   },
-  bottomView:{
-   height:'40%',
-   backgroundColor:'red',
-  
+  descriptiontxt:{
+    fontSize:15,
+    fontWeight:'500',
+     color:'white'
   }
+  
+
+
+
+
 
 
 })

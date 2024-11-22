@@ -1,49 +1,27 @@
 import { View, Text ,StyleSheet,Image, ImageBackground} from 'react-native'
 import React from 'react'
 import { BottomTabView } from '@react-navigation/bottom-tabs'
+import { Link } from 'expo-router'
 
 const select = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.upView}>
-        
-      </View>
+    <ImageBackground source={require('../../assets/images/LoadingPage1.png')} resizeMode="cover"  style={styles.bgContainer}>
 
-      <View style={styles.bottomView}>
-      <ImageBackground source={require('../../assets/images/intropage1.png')} resizeMode="cover" style={styles.image}>
-      <Text>ffkffk</Text>
-      </ImageBackground>
+     
+<Link href={'/register/RegisterScreen'}>go to register</Link>
+<Link href={'/login/LoginScreen'}>go to login</Link>
       
-      </View>
-    </View>
+      </ImageBackground>
   )
 }
 
 const styles=StyleSheet.create({
-    container:{
+    bgContainer:{
         flex:1,
         height:'100%',
-      
-      
+        width:'100%'
     },
-    bottomImg:{
-        height:'100%',
-        width:8,
-        elevation:9
-
-    },
-    upView:{
-     height:'50%',
-    },
-    bottomView:{
-      height:"50%",
-      width:400,
-      
-    },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-      },
+    
 
 })
 
