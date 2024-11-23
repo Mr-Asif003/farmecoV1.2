@@ -12,7 +12,8 @@ const RegisterScreen = () => {
       <View style={styles.loginContainer}>
         {/* <Camera color="red" size={48} /> */}
         <View style={styles.topHeading}>
-          <Text style={styles.helloTxt}>Create an account</Text>
+        <Text style={styles.helloTxt}>Welcome,</Text>
+        <Text style={styles.createAcc}>Create Your Account</Text>
           
         </View>
         <View style={styles.inputContainer}>
@@ -62,15 +63,15 @@ const styles = StyleSheet.create({
   loginContainer: {
     position: 'relative',
     display: 'flex',
-    height: '70%',
+    height: '80%',
     backgroundColor: '#28Ac60',
 
     shadowColor: 'black',
     shadowOffset: { width: 100, height: 100 },
     shadowOpacity: 1,
     shadowRadius: 2,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 25,  
+    borderTopRightRadius: 25,
     elevation: 10,
     margin: 0
 
@@ -79,24 +80,27 @@ const styles = StyleSheet.create({
   heroContainer: {
     position: 'relative',
     display: 'flex',
-    height: '30%',
+    height: '20%',
 
   },
   topHeading: {
     width: "100%",
     display: "flex",
-    justifyContent: 'center',
-    alignItems: "center"
+     margin:10
   },
   helloTxt: {
     fontSize: 32,
     fontWeight: '500',
-    color: 'white',
-    marginTop:5,
+    color: 'black',
+    marginTop:19,
+    
+    fontFamily:'archivo'
   },
   createAcc: {
-    fontSize: 15,
-    fontWeight: '500'
+    fontSize:32,
+    fontWeight: '800',
+    fontFamily:'archivo',
+    color:'white'
   },
   txtView: {
     backgroundColor: 'white',
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     borderRadius: 15,
     marginTop: '4%',
-    height: 45,
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     padding: 5

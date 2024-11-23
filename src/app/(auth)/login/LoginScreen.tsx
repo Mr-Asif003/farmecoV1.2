@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   loginContainer: {
     position: 'relative',
     display: 'flex',
-    height: '70%',
+    height: '80%',
     backgroundColor: '#28Ac60',
 
     shadowColor: 'black',
@@ -76,20 +76,19 @@ const styles = StyleSheet.create({
   heroContainer: {
     position: 'relative',
     display: 'flex',
-    height: '30%',
+    height: '20%',
 
   },
   topHeading: {
     width: "100%",
     display: "flex",
-    justifyContent: 'center',
-    alignItems: "center"
+   margin:10,
   },
   helloTxt: {
     fontSize: 30,
     fontWeight: '500',
-    color: 'white',
-    marginTop:5,
+    color: 'Black',
+    marginTop:19,
     fontFamily:'archivo'
   },
   createAcc: {
@@ -138,7 +137,7 @@ fontSize:16
 },
 selectContainer:{
   position:'relative',
-  marginTop:'20%',
+  marginTop:'35%',
   backgroundColor:'white',
   width:250,
   height:40,
@@ -158,17 +157,16 @@ login:{
   alignItems:'center',
   justifyContent:'center',
   backgroundColor:'#1E7F47',
-
+  borderRadius:10,
+  elevation:1,
 },
 logintxt:{
-  // color:'red',
-  // fontWeight:'900',
-  // fontSize:16
-},
-registertxt:{
   color:'white',
   fontWeight:'700',
   fontSize:16
+},
+registertxt:{
+ 
 },
 
 Register:{
@@ -180,8 +178,7 @@ Register:{
  flexDirection:'row',
  alignItems:'center',
  justifyContent:'center',
- borderRadius:10,
- elevation:1,
+ 
 }
 
 

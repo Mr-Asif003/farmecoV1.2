@@ -6,6 +6,7 @@ const Registerlayout = () => {
  return(
     <Stack screenOptions={{headerShown:false}}>
         <Stack.Screen name='RegisterScreen'  options={{headerShown:false}}/>
+        <Stack.Screen name='farmer'/>
     </Stack>
  )
 }

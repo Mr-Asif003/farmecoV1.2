@@ -5,7 +5,7 @@ import { Link } from 'expo-router'
 
 const select = () => {
   return (
-    <ImageBackground source={require('../../assets/images/LoadingPage1.png')} resizeMode="cover"  style={styles.bgContainer}>
+    <ImageBackground source={require('../../assets/images/stylebg.png')} resizeMode="cover"  style={styles.bgContainer}>
 
      
 <Link href={'/register/RegisterScreen'}>go to register</Link>

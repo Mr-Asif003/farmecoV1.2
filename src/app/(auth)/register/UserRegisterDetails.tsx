@@ -2,9 +2,14 @@ import { View, Text, StyleSheet, TextInput, Touchable, TouchableOpacity, Pressab
 import React from 'react'
 import { Camera, Mails, LockKeyhole, MoveRight } from 'lucide-react-native';
 import { Redirect, router } from 'expo-router';
-
+import MainLayout from '../../(main)/_layout';
+import index from '../../(main)/farmer';
 
 const UserRegisterDetails = () => {
+
+    const rolefunction=()=>{
+
+    }
 
     return (
         <View style={styles.container}>
@@ -12,60 +17,93 @@ const UserRegisterDetails = () => {
             <View style={styles.loginContainer}>
                 {/* <Camera color="red" size={48} /> */}
                 <View style={styles.topHeading}>
-                    <Text style={styles.helloTxt}>Details !</Text>
-                    <Text style={styles.createAcc}>Please Enter Your Correct Information</Text>
+                <Text style={styles.helloTxt}>Hi,</Text>
+                <Text style={styles.createAcc}>Enter Your Details</Text>
                 </View>
 
                 {/* fullname */}
                 <View style={styles.outsideView}>
-                        <View><Text style={styles.title}>Full Name :- </Text></View>
-                        <View style={styles.txtView} >
-                            <TextInput placeholder='Enter Your Name' style={styles.txtInput}/>
-                        </View>
+                    <View><Text style={styles.title}>Full Name :- </Text></View>
+                    <View style={styles.txtView} >
+                        <TextInput placeholder='Enter Your Name' style={styles.txtInput} />
                     </View>
-                 {/* phone num*/}
-                 <View style={styles.outsideView}>
-                        <View><Text style={styles.Mobtitle}>Mob Number:- </Text></View>
-                        <View style={styles.MobtxtView} >
-                            <TextInput placeholder='Enter Your Name' style={styles.txtInput}/>
-                        </View>
+                </View>
+                {/* phone num*/}
+                <View style={styles.outsideView}>
+                    <View><Text style={styles.Mobtitle}>Mob Number :- </Text></View>
+                    <View style={styles.MobtxtView} >
+                        <TextInput placeholder='Enter Your Mobile number' style={styles.txtInput} />
                     </View>
-                 <Text style={{fontWeight:'800',marginTop:5,marginLeft:5}}>Select Your Role : -</Text>
-                 <View style={styles.rollOutsideView}>
-                        <Pressable style={styles.rolebtn}>
-
-                        </Pressable>
-                        <Pressable style={styles.rolebtn}>
-
-                        </Pressable>
-                        
-                    </View>
-                
-
-                    
-
-
+                </View>
+                <Text style={{ fontWeight: '800', marginTop: 10, marginLeft: 7, fontSize: 20 }}>Select Your Role : -</Text>
+                <View style={styles.rollOutsideView}>
+                    <Pressable style={styles.rolebtn}>
+                   
+                    </Pressable>
                   
-
-
+                    <TouchableOpacity  style={styles.rolebtn} onPress={rolefunction}>
+                        <Text>Buyer</Text>
+                    </TouchableOpacity>
                     
 
+                </View>
+                {/* Address line 1 */}
+                <View style={styles.outsideView}>
+                    <View><Text style={styles.Mobtitle}>Address  :-  </Text></View>
+                    <View style={styles.txtView} >
+                        <TextInput placeholder='Address' style={styles.txtInput} />
+                    </View>
+                </View>
+
+                {/* city*/}
+                <View style={styles.outsideView}>
+                    <View><Text style={styles.Mobtitle}>City :-           </Text></View>
+                    <View style={styles.MobtxtView} >
+                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
+                    </View>
+                </View>
+
+                {/* state*/}
+                <View style={styles.outsideView}>
+                    <View><Text style={styles.Mobtitle}>State:-          </Text></View>
+                    <View style={styles.MobtxtView} >
+                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
+                    </View>
+                </View>
+
+                {/* Pincode*/}
+                <View style={styles.outsideView}>
+                    <View><Text style={styles.Mobtitle}>Pincode:-     </Text></View>
+                    <View style={styles.MobtxtView} >
+                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
+                    </View>
+                </View>
 
 
 
 
+
+
+
+
+
+
+
+
+
+                <View style={styles.continueView}>
                     {/* continue btn */}
-                    <TouchableOpacity style={styles.continuebtn}>
+                    <TouchableOpacity style={styles.continuebtn}  onPress={()=>router.replace('../../(main)/farmer')}>
                         <Text style={styles.continuetxt}>Continue  </Text>
                         <MoveRight color={'white'} fontWeight={50} />
                     </TouchableOpacity>
-
-
-
                 </View>
 
+
             </View>
-        
+
+        </View>
+
     )
 }
 
@@ -78,8 +116,8 @@ const styles = StyleSheet.create({
     loginContainer: {
         position: 'relative',
         display: 'flex',
-        height: '70%',
-        backgroundColor: 'white',
+        height: '80%',
+        backgroundColor: '#28AC60',
 
         shadowColor: 'black',
         shadowOffset: { width: 100, height: 100 },
@@ -95,24 +133,30 @@ const styles = StyleSheet.create({
     heroContainer: {
         position: 'relative',
         display: 'flex',
-        height: '30%',
+        height: '25%',
 
     },
     topHeading: {
         width: "100%",
         display: "flex",
         justifyContent: 'center',
-        alignItems: "center"
+        marginLeft:10,
+        marginTop:5
     },
     helloTxt: {
-        fontSize: 30,
-        fontWeight: '700',
-        color: '#1E7F47'
-    },
-    createAcc: {
-        fontSize: 15,
-        fontWeight: '500'
-    },
+        fontSize: 32,
+        fontWeight: '500',
+        color: 'black',
+        marginTop:19,
+        
+        fontFamily:'archivo'
+      },
+      createAcc: {
+        fontSize:32,
+        fontWeight: '800',
+        fontFamily:'archivo',
+        color:'white'
+      },
     txtView: {
         backgroundColor: 'white',
         width: "70%",
@@ -128,68 +172,76 @@ const styles = StyleSheet.create({
         height: 37,
         color: 'green'
     },
-   
+
     continuebtn: {
-        marginTop: '9%',
+        marginTop: '5%',
         height: 38,
         width: 120,
-        backgroundColor: '#38B000',
+        backgroundColor: '#1E7F47',
         borderRadius: 20,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 10
+        elevation: 5
     },
     continuetxt: {
         color: 'white',
         fontWeight: '900',
-        fontSize: 16
+        fontSize: 17
     },
-    
-  
+
+
     outsideView: {
         display: 'flex',
         flexDirection: 'row',
-        marginLeft:9,
-        alignItems: 'center'
+        marginLeft: 9,
+        alignItems: 'center',
+        marginTop: 20
     },
-    title:{
-        marginTop:5,
-        fontSize:15,
-        fontWeight:'600'
+    title: {
+        marginTop: 5,
+        fontSize: 18,
+        fontWeight: '600'
     },
-    Mobtitle:{
-        marginTop:5,
-        fontSize:13,
-        fontWeight:'600'
+    Mobtitle: {
+        marginTop: 5,
+        fontSize: 16,
+        fontWeight: '600'
     },
     MobtxtView: {
         backgroundColor: 'white',
         width: "50%",
-        elevation: 10,
+        elevation: 1,
         borderRadius: 9,
-        marginTop: '3%',
+
         height: 35,
         flexDirection: 'row',
         alignItems: 'center',
         padding: 1
     },
-    rolebtn:{
-        margin:5,
-        height:50,
-        width:100,
-        backgroundColor:'#29AD61',
-        borderRadius:10
+    rolebtn: {
+        marginTop: 9,
+        height: 70,
+        width: 100,
+        backgroundColor: 'white',
+        borderRadius: 10
     },
-    rollOutsideView:{
-      display:'flex',
-      flexDirection:'row',
-      justifyContent:'space-around'
+    rollOutsideView: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+
+    },
+    continueView:{
+        width:'100%',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center'
     }
-    
-    
-    
+
+
+
 
 
 

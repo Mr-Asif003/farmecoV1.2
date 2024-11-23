@@ -12,7 +12,7 @@ const index = () => {
   const slides = [
     {
       key: 1,
-      title: 'Welcome to FarmEco',
+      title: 'Welcome to \n FarmEco',
       text: 'A place where you can Buy or Sell Crpos',
       image: require('../../assets/images/introman1.png'),
       backgroundColor: '#59b2ab',
