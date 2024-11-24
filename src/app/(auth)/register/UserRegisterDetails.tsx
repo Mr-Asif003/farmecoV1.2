@@ -1,15 +1,66 @@
-import { View, Text, StyleSheet, TextInput, Touchable, TouchableOpacity, Pressable } from 'react-native'
-import React from 'react'
-import { Camera, Mails, LockKeyhole, MoveRight } from 'lucide-react-native';
-import { Redirect, router } from 'expo-router';
+import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {PhoneCall, MoveRight,CircleUser,MapPinHouse } from 'lucide-react-native';
+import { Redirect, router, useRouter } from 'expo-router';
 import MainLayout from '../../(main)/_layout';
-import index from '../../(main)/farmer';
+
+
+import { db, storage, auth } from "../../firebaseConfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
+// import * as ImagePicker from "expo-image-picker";
+
+
 
 const UserRegisterDetails = () => {
+    const router=useRouter();
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [profileImage, setProfileImage] = useState(null);
 
-    const rolefunction=()=>{
+    // // const pickImage = async () => {
+    // //   const result = await ImagePicker.launchImageLibraryAsync({
+    // //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    // //     allowsEditing: true,
+    // //     aspect: [1, 1],
+    // //     quality: 1,
+    // //   });
 
-    }
+    //   if (!result.canceled) {
+    //     setProfileImage(result.uri);
+    //   }
+    // };
+
+    const saveDetails = async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            alert("User not authenticated");
+            return;
+        }
+
+        try {
+            let profileImageUrl = null;
+            if (profileImage) {
+                const imageRef = ref(storage, `profileImages/${user.uid}.jpg`);
+                const img = await fetch(profileImage);
+                const bytes = await img.blob();
+                await uploadBytes(imageRef, bytes);
+                profileImageUrl = await getDownloadURL(imageRef);
+            }
+
+            await updateDoc(doc(db, "users", user.uid), {
+                name,
+                phone,
+                profileImage: profileImageUrl,
+            });
+
+            alert("Details saved successfully!");
+            router.replace('./RoleScreen')
+            
+        } catch (error) {
+            alert("Error saving details: " + error.message);
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -17,67 +68,44 @@ const UserRegisterDetails = () => {
             <View style={styles.loginContainer}>
                 {/* <Camera color="red" size={48} /> */}
                 <View style={styles.topHeading}>
-                <Text style={styles.helloTxt}>Hi,</Text>
-                <Text style={styles.createAcc}>Enter Your Details</Text>
+                    <Text style={styles.helloTxt}>Hi,</Text>
+                    <Text style={styles.createAcc}>Enter Your Details</Text>
                 </View>
 
                 {/* fullname */}
                 <View style={styles.outsideView}>
-                    <View><Text style={styles.title}>Full Name :- </Text></View>
+                    <View><Text style={styles.title}>Full Name :-   </Text></View>
                     <View style={styles.txtView} >
-                        <TextInput placeholder='Enter Your Name' style={styles.txtInput} />
+                    <CircleUser color='black' style={{marginLeft:2}}/>
+                        <TextInput  
+        placeholder="Name"
+        value={name}
+        onChangeText={setName} style={styles.txtInput} />
                     </View>
                 </View>
                 {/* phone num*/}
                 <View style={styles.outsideView}>
+               
                     <View><Text style={styles.Mobtitle}>Mob Number :- </Text></View>
                     <View style={styles.MobtxtView} >
-                        <TextInput placeholder='Enter Your Mobile number' style={styles.txtInput} />
+                    <PhoneCall color='black' style={{marginLeft:2}}/>
+                        <TextInput placeholder="Phone Number"
+                            value={phone}
+                            onChangeText={setPhone}
+                            keyboardType="phone-pad" style={styles.txtInput} />
                     </View>
                 </View>
-                <Text style={{ fontWeight: '800', marginTop: 10, marginLeft: 7, fontSize: 20 }}>Select Your Role : -</Text>
-                <View style={styles.rollOutsideView}>
-                    <Pressable style={styles.rolebtn}>
-                   
-                    </Pressable>
-                  
-                    <TouchableOpacity  style={styles.rolebtn} onPress={rolefunction}>
-                        <Text>Buyer</Text>
-                    </TouchableOpacity>
-                    
 
-                </View>
                 {/* Address line 1 */}
                 <View style={styles.outsideView}>
-                    <View><Text style={styles.Mobtitle}>Address  :-  </Text></View>
+                    <View><Text style={styles.Mobtitle}>Address  :-        </Text></View>
                     <View style={styles.txtView} >
+                    <MapPinHouse color='black' style={{marginLeft:2}}/>
                         <TextInput placeholder='Address' style={styles.txtInput} />
                     </View>
                 </View>
 
-                {/* city*/}
-                <View style={styles.outsideView}>
-                    <View><Text style={styles.Mobtitle}>City :-           </Text></View>
-                    <View style={styles.MobtxtView} >
-                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
-                    </View>
-                </View>
 
-                {/* state*/}
-                <View style={styles.outsideView}>
-                    <View><Text style={styles.Mobtitle}>State:-          </Text></View>
-                    <View style={styles.MobtxtView} >
-                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
-                    </View>
-                </View>
-
-                {/* Pincode*/}
-                <View style={styles.outsideView}>
-                    <View><Text style={styles.Mobtitle}>Pincode:-     </Text></View>
-                    <View style={styles.MobtxtView} >
-                        <TextInput placeholder='Enter your City' style={styles.txtInput} />
-                    </View>
-                </View>
 
 
 
@@ -93,7 +121,7 @@ const UserRegisterDetails = () => {
 
                 <View style={styles.continueView}>
                     {/* continue btn */}
-                    <TouchableOpacity style={styles.continuebtn}  onPress={()=>router.replace('../../(main)/farmer')}>
+                    <TouchableOpacity style={styles.continuebtn} onPress={saveDetails}>
                         <Text style={styles.continuetxt}>Continue  </Text>
                         <MoveRight color={'white'} fontWeight={50} />
                     </TouchableOpacity>
@@ -140,37 +168,39 @@ const styles = StyleSheet.create({
         width: "100%",
         display: "flex",
         justifyContent: 'center',
-        marginLeft:10,
-        marginTop:5
+        marginLeft: 10,
+        marginTop: 5
     },
     helloTxt: {
         fontSize: 32,
         fontWeight: '500',
         color: 'black',
-        marginTop:19,
-        
-        fontFamily:'archivo'
-      },
-      createAcc: {
-        fontSize:32,
+        marginTop: 19,
+
+        fontFamily: 'archivo'
+    },
+    createAcc: {
+        fontSize: 32,
         fontWeight: '800',
-        fontFamily:'archivo',
-        color:'white'
-      },
+        fontFamily: 'archivo',
+        color: 'white'
+    },
     txtView: {
         backgroundColor: 'white',
         width: "70%",
         elevation: 1,
-        borderRadius: 9,
-        marginTop: '3%',
-        height: 35,
+        borderRadius: 15,
+        marginTop: '4%',
+        height: 43,
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 1
+        padding: 0
     },
     txtInput: {
-        height: 37,
-        color: 'green'
+        height: 43,
+        width: '100%',
+        color: 'green',
+        fontSize: 17,
     },
 
     continuebtn: {
@@ -215,29 +245,17 @@ const styles = StyleSheet.create({
         elevation: 1,
         borderRadius: 9,
 
-        height: 35,
+        height: 40,
         flexDirection: 'row',
         alignItems: 'center',
         padding: 1
     },
-    rolebtn: {
-        marginTop: 9,
-        height: 70,
-        width: 100,
-        backgroundColor: 'white',
-        borderRadius: 10
-    },
-    rollOutsideView: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around'
 
-    },
-    continueView:{
-        width:'100%',
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center'
+    continueView: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 

@@ -9,7 +9,7 @@ const select = () => {
 
      
 <Link href={'/register/RegisterScreen'}>go to register</Link>
-<Link href={'/login/LoginScreen'}>go to login</Link>
+<Link href={'./login/LoginScreen'}>go to login</Link>
       
       </ImageBackground>
   )

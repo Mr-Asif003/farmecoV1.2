@@ -10,4 +10,4 @@ const LoginLayout = () => {
   )
 }
 
-export default LoginLayout
+export default LoginLayout;

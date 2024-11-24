@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Stack } from 'expo-router';
 
-const FarmerLayout = () => {
+const ConsumerLayout = () => {
   return (
     <Stack>
         <Stack.Screen name='FarmerIndex' />
@@ -10,4 +10,4 @@ const FarmerLayout = () => {
   )
 }
 
-export default FarmerLayout;
+export default ConsumerLayout;

@@ -1,0 +1,1 @@
+import {auth} "./src/assets/images/splash-icon.png"
