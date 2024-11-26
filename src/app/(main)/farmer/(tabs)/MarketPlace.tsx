@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const FarmerIndex = () => {
+const MarketPlace = () => {
   return (
     <View>
-      <Text>FarmerIndex</Text>
+      <Text>MarketPlace</Text>
     </View>
   )
 }
 
-export default FarmerIndex
+export default MarketPlace

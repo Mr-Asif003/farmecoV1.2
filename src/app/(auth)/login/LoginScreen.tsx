@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert ,TouchableOpacity } fr
 import { auth, db } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import FarmerIndex from "../../(main)/farmer/FarmerIndex";
+import FarmerIndex from "../../(main)/farmer/(tabs)/FarmerIndex";
 import ConsumerIndex from "../../(main)/consumer/ConsumerIndex";
 import AdminIndex from "../../(main)/admin/AdminIndex";
 import {  Mails, LockKeyhole,MoveRight,Key } from 'lucide-react-native';
@@ -63,10 +63,10 @@ const handleSubmit=async()=>{
 
         // Redirect user based on their role
         if (role === "Farmer") {
-          router.replace('../../(main)/farmer/FarmerIndex');
+          router.replace('../../(main)/farmer');
           alert('Succesfully Login with Farmer Account')
         } else if (role === "Consumer") {
-          router.replace("../../(main)/consumer/ConsumerIndex");
+          router.replace("../../(main)/consumer");
           alert('Succesfully Login with Consumer  Account')
         } else if (role === "Admin") {
           router.replace("../../(main)/admin/AdminIndex");

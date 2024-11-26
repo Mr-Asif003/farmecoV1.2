@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Header = () => {
+const Account = () => {
   return (
     <View>
-      <Text>H</Text>
+      <Text>Account</Text>
     </View>
   )
 }
 
-export default Header;
+export default Account
