@@ -35,7 +35,7 @@ function TabBar({ state, descriptors, navigation }:BottomTabBarProps) {
     <View onLayout={onTabBarLayout} style={styles.tabBar}>
         <Animated.View style={[animatedStyle,{
             position:'absolute',
-            backgroundColor:'orange',
+            backgroundColor:'#257180',
             borderRadius:30,
             marginHorizontal:12,
             
@@ -57,7 +57,7 @@ function TabBar({ state, descriptors, navigation }:BottomTabBarProps) {
         const isFocused = state.index === index;
 
         const onPress = () => {
-            tabPositionX.value=withSpring((buttonWidth*index)-150,{duration:1500})
+            tabPositionX.value=withSpring((buttonWidth*index)-145,{duration:1500})
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
@@ -126,8 +126,8 @@ tabBar:{
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:'white',
-    marginHorizontal:10,
-    paddingVertical:15,
+    marginHorizontal:13,
+    paddingVertical:10,
     borderRadius:15,
     shadowColor:'#000',
     shadowOffset:{width:0,height:10},

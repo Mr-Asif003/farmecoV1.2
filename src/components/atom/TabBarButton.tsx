@@ -9,12 +9,16 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Route } from 'expo-router/build/Route';
 import {interpolate, useAnimatedStyle, useSharedValue, withSpring} from 'react-native-reanimated'
 import Animated from "react-native-reanimated"
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const icon = {
+
+
+const icon={
     index: (props: any) => <FontAwesome size={28} name="home" {...props} />,
-    MarketPlace: (props: any) => <FontAwesome size={28} name="home" {...props} />,
-    myList: (props: any) => <FontAwesome size={28} name="home" {...props} />,
-    Account: (props: any) => <FontAwesome size={28} name="home" {...props} />
+    Categories: (props: any) => <FontAwesome5 name="store-alt" size={24} color="black" {...props} />,
+    Cart: (props: any) => <FontAwesome size={28} name="home" {...props} />,
+    Account: (props: any) => <MaterialCommunityIcons name="account-box" size={24} color="black" {...props} />
 }
 const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label }: { onPress: Function, onLongPress: Function, isFocused: boolean, routeName: string, color: string, label: string }) => {
     const scale=useSharedValue(0);
@@ -52,11 +56,17 @@ const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label
 
           <Animated.View style={animatedIconStyle}>
 
-            {icon[routeName]({
-                color: isFocused ? '#28Ac60' : '#222'
-            })}
+            {/* {icon[routeName]({
+                color: isFocused ? 'white' : '#222'
+            })} */}
+
+            {
+                icon[routeName]({
+                    color: isFocused ? 'white' : '#222'  
+                })
+            }
           </Animated.View>
-            <Animated.Text style={[{ color: isFocused ? '#28Ac60' : '#222',fontSize:12 },animatedTextStyle]}>
+            <Animated.Text style={[{ color: isFocused ? 'white' : '#222',fontSize:12 },animatedTextStyle]}>
                 {label}
             </Animated.Text>
 

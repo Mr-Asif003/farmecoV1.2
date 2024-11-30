@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth ,db } from "../../firebaseConfig";
+import index from "../../(main)/farmer/(tabs)";
 
 export default function RoleSelectionScreen() {
     const router=useRouter()
@@ -16,7 +17,7 @@ export default function RoleSelectionScreen() {
 
       switch (role) {
         case "Farmer":
-            router.push("../../(main)/farmer/FarmerIndex");
+            router.push("../../(main)/farmer/(tabs)");
           break;
         case "Consumer":
             router.push("../../(main)/consumer/ConsumerIndex");

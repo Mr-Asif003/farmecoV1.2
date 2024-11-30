@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {PhoneCall, MoveRight,CircleUser,MapPinHouse } from 'lucide-react-native';
 import { Redirect, router, useRouter } from 'expo-router';
 import MainLayout from '../../(main)/_layout';
-
+import Cart from "../../(main)/farmer/(tabs)/Cart";
 
 import { db, storage, auth } from "../../firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";

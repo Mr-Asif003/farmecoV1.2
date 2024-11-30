@@ -4,18 +4,64 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Tabs } from 'expo-router';
 import { Gift } from 'lucide-react';
 import { Icon } from 'lucide-react-native';
-import { View } from 'react-native';
+import { View ,StyleSheet} from 'react-native';
 import TabBar from '@/src/components/atom/TabBar';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 const TabLayout=()=>{
 return(
-  <Tabs tabBar={props=><TabBar {...props} />} >
-    <Tabs.Screen name='index' options={{title:'Home'}} />
-    <Tabs.Screen name='MarKetPlace' options={{title:'MarketPlace'}}  />
-    <Tabs.Screen name='myList' options={{title:'Mylist'}}  />
-    <Tabs.Screen name='Account' options={{title:'Account'}}  />
+  <Tabs  screenOptions={{ tabBarActiveTintColor: 'green' }}  >
+     <Tabs.Screen
+        name="index"
+        options={{
+          headerShown:false,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+        }}/>
+    <Tabs.Screen name='Categories'   options={{
+          headerShown:false,
+          title: 'Sell',
+          tabBarIcon: ({ color }) =><FontAwesome5 name="store-alt" size={24} color={color}/>,
+        }}/>
+    <Tabs.Screen name='Cart'  options={{
+          headerShown:false,
+          title: 'MyProduct',
+          tabBarIcon: ({ color }) => <FontAwesome name="cart-arrow-down" color={color} size={24} />,
+        }}/>
+    <Tabs.Screen name='Account'  options={{
+          headerShown:false,
+          title: 'Account',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account-box" size={24} color={color}/>,
+        }} />
+
+  
   </Tabs>
 )
 }
+
+const styles=StyleSheet.create({
+  tabBar:{
+      position:'absolute',
+      bottom:20,
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:'white',
+      marginHorizontal:13,
+      paddingVertical:10,
+      borderRadius:15,
+      shadowColor:'#000',
+      shadowOffset:{width:0,height:10},
+      shadowRadius:10,
+      shadowOpacity:0.1,
+  },
+  tabBarItem:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+      gap:5,
+  }
+  })
 
 export default TabLayout;

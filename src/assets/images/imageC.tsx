@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const MarketPlace = () => {
+const imageC = () => {
   return (
     <View>
-      <Text>MarketPlace</Text>
+      <Text>imageC</Text>
     </View>
   )
 }
 
-export default MarketPlace
+export default imageC
