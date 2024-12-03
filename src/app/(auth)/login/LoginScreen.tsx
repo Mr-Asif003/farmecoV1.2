@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert ,TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Alert ,TouchableOpacity, Dimensions ,Image} from "react-native";
 import { auth, db } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
@@ -13,13 +13,15 @@ import {createUserWithEmailAndPassword, sendEmailVerification, signOut} from 'fi
 
 import { useRouter } from 'expo-router';
 
-//firestore
-
+//reanimation
+import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } from 'react-native-reanimated';
+const { width, height } = Dimensions.get('window');
 
 
 
 const LoginScreen = () => {
-
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
   //authentication part
   const router=useRouter();
   const [email, setEmail] = useState('');
@@ -86,7 +88,32 @@ const handleSubmit=async()=>{
 
 
 
+  const speed = 100; // Adjust speed here
+  const diagonalDistance = Math.sqrt(width ** 2 + height ** 2);
+  const duration = (diagonalDistance / speed) * 1000; // Duration in milliseconds
 
+  //reanimation...........
+  React.useEffect(() => {
+    // Animate horizontally and vertically with finite time per cycle
+    translateX.value = withRepeat(
+      withTiming(-100, { duration }), // Complete horizontal movement in 4 seconds
+      -1, // Infinite repetitions
+      true // Reverse direction on each cycle
+    );
+
+    translateY.value = withRepeat(
+      withTiming(100, { duration }), // Complete vertical movement in 4 seconds
+      -1, // Infinite repetitions
+      true // Reverse direction on each cycle
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateX.value },
+      { translateY: translateY.value },
+    ],
+  }));
 
 
 
@@ -101,7 +128,13 @@ const handleSubmit=async()=>{
   
   return (
     <View style={styles.container}>
-      <View style={styles.heroContainer}></View>
+     
+     <Animated.View style={[styles.heroContainer,animatedStyle]}>
+      <Image source={require('../../../assets/images/loginbg.png')} style={styles.image} />
+      
+
+      </Animated.View>
+
       <View style={styles.loginContainer}>
         {/* <Camera color="red" size={48} /> */}
         <View style={styles.topHeading}>
@@ -140,6 +173,7 @@ const handleSubmit=async()=>{
         </View>
         
       </View>
+      <View style={styles.logo}><Image source={require('../../../assets/images/FarmecoLogo.png')} style={styles.logoImage}/></View>
     </View>
   )
 }
@@ -169,9 +203,11 @@ const styles = StyleSheet.create({
 
   },
   heroContainer: {
-    position: 'relative',
-    display: 'flex',
-    height: '20%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+ marginLeft:50
 
   },
   topHeading: {
@@ -284,7 +320,33 @@ Register:{
  flexDirection:'row',
  alignItems:'center',
  justifyContent:'center',
-}
+},
+image: {
+  width:"200%",
+  height:"260%",
+  resizeMode:'cover'
+},
+logotitle:{
+  display:'flex',
+  width:'100%',
+  justifyContent:'center',
+  alignItems:'center',
+
+},
+logo:{
+  position:'absolute',
+  margin:5,
+  height: 50,
+  width: '30%',
+  
+} ,
+logoImage: {
+  display: 'flex',
+  height: '100%',
+  width: 'auto',
+  borderRadius:15
+},
+
 
 
 

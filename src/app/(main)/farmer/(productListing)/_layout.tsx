@@ -12,7 +12,24 @@ backgroundColor: '#28AC60'
      <Stack.Screen name='SelectFruits'options={{headerShown:false,headerStyle: {
 backgroundColor: 'apple'
 },}}/>
-<Stack.Screen name='ListingPage' />
+<Stack.Screen name='ListingPage'options={{headerShown:false,headerStyle: {
+backgroundColor: 'black'
+},}} />
+
+<Stack.Screen name='MyProducts'options={{headerShown:false,headerStyle: {
+backgroundColor: 'black'
+},}} />
+
+<Stack.Screen name='MyProductsVeg'options={{headerShown:false,headerStyle: {
+backgroundColor: 'black'
+},}} />
+<Stack.Screen name='FruitListingPage'options={{headerShown:false,headerStyle: {
+backgroundColor: 'black'
+},}} />
+<Stack.Screen name='(preorder)'options={{headerShown:false,headerStyle: {
+backgroundColor: 'black'
+},}} />
+
     </Stack>
   )
 }

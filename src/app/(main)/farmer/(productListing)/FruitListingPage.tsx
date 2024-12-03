@@ -13,7 +13,7 @@ import { db, auth } from '@/src/app/firebaseConfig';
 
 
 
-const ListingPage = ({ }: { title: string, id: 'string' }) => {
+const FruitListingPage = ({ }: { title: string, id: 'string' }) => {
 
     const router = useRouter()
     const { itemId, itemRate, itemtitle } = useLocalSearchParams();
@@ -67,10 +67,10 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
             }
             // Adding crop data to the user's collection
             const userRef = doc(db, "users", user.uid);
-            await addDoc(collection(userRef, 'crops'), cropData);
+            await addDoc(collection(userRef, 'fruits'), cropData);
 
             //adding to FarmerProducts db;
-            await addDoc(collection(db, "FarmerProducts"), cropData);
+            await addDoc(collection(db, "FarmerProductsFruits"), cropData);
             alert('Crop Listed Successfully !');
 
 
@@ -111,10 +111,10 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
             <View style={styles.topContainer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
 
-                    <Image source={require('../../../../assets/images/vegtables.png')} style={styles.image}></Image>
+                    <Image source={require('../../../../assets/images/f1.jpg')} style={styles.image}></Image>
                     <View style={{ marginTop: 10 }}>
 
-                        <Text style={{ fontSize: 17, fontWeight: '400', marginTop: 1,marginLeft:-2 }}> Vegetable id = {itemId}</Text>
+                        <Text style={{ fontSize: 18, fontWeight: '400', marginTop: 1,marginLeft:-2,color:'white' }}> Vegetable id = {itemId}</Text>
 
                         <View style={styles.container}>
                         
@@ -164,7 +164,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                     <TextInput
                         value={Quantity}
                         onChangeText={setQuantity}
-                        placeholder='Quantity in Kg' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 230, marginTop: 1, fontSize: 17, paddingLeft: 10 }} />
+                        placeholder='Quantity in Kg' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 230, marginTop: 1, fontSize: 17, paddingLeft: 10 }} />
                 </View>
                 <View style={{ marginTop: 5, marginLeft: 20 }}>
                         <Text style={{ fontSize: 15, fontWeight: '500', marginLeft: 1 }}>Rating /10</Text>
@@ -172,7 +172,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                             value={Rating}
                             onChangeText={setRating}
 
-                            placeholder='Grade out of 10' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 120, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+                            placeholder='Grade out of 10' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 120, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                     </View>
 
                 </View>
@@ -184,17 +184,16 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                         <TextInput
                             value={price}
                             onChangeText={setPrice}
-                            placeholder='Demanding Price Per Kg' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 170, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+                            placeholder='Demanding Price Per Kg' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 170, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                     </View>
 
                     <View style={{ marginTop: 5, marginLeft: 20 }}>
                         <Text style={{ fontSize: 17, fontWeight: '500', marginLeft: 10 }}>Date of Delivery</Text>
                         <TextInput
-                        
                             value={dod}
                             onChangeText={setDod}
-                            
-                            placeholder='Date' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 170, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+
+                            placeholder='Date' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 170, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                     </View>
                 </View>
 
@@ -204,7 +203,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                     <TextInput
                         value={state}
                         onChangeText={setState}
-                        placeholder='State' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 370, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+                        placeholder='State' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 370, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                 </View>
 
 
@@ -215,7 +214,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                         <TextInput
                             value={phone}
                             onChangeText={setPhone}
-                            placeholder='Phone Number' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 200, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+                            placeholder='Phone Number' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 200, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                     </View>
 
 
@@ -224,7 +223,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                         <TextInput
                             value={pinCode}
                             onChangeText={setPinCode}
-                            placeholder='Pin Code' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 45, width: 130, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
+                            placeholder='Pin Code' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 45, width: 130, marginTop: 1, fontSize: 15, paddingLeft: 10 }} />
                     </View>
                 </View>
                 <View style={{ marginTop: 7, }}>
@@ -233,7 +232,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
                         value={address}
                         onChangeText={setAddress}
                         numberOfLines={3} multiline={true}
-                        placeholder='Address' style={{ backgroundColor: '#BDE7CF', borderRadius: 20, height: 55, width: 350, marginTop: 1, fontSize: 20, paddingLeft: 10 }} />
+                        placeholder='Address' style={{ backgroundColor: '#ffb3c1', borderRadius: 20, height: 55, width: 350, marginTop: 1, fontSize: 20, paddingLeft: 10 }} />
                 </View>
                 <Text style={{ fontSize: 18, fontWeight: '600', marginTop: 10 }}>Total Rupees :- {total}</Text>
 
@@ -248,7 +247,7 @@ const ListingPage = ({ }: { title: string, id: 'string' }) => {
 
 
                 <TouchableOpacity style={styles.stackIcon} onPress={() => router.replace('./SelectFruits')}>
-                    <AntDesign name="leftsquare" color="green" size={44} />
+                    <AntDesign name="leftsquare" color="red" size={44} />
                 </TouchableOpacity >
             </View>
         </View>
@@ -260,7 +259,7 @@ const styles = StyleSheet.create({
     },
     topContainer: {
         height: 200,
-        backgroundColor: '#89fc00'
+        backgroundColor: '#d80032'
     },
     bottomContainer: {
         marginTop: 60,
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     txtInput: {
-        backgroundColor: '#BDE7CF',
+        backgroundColor: '#ffb3c1',
         height: 80,
         width: 350,
         borderRadius: 20,
@@ -295,7 +294,7 @@ const styles = StyleSheet.create({
     },
     addbtn: {
         height: 50,
-        backgroundColor: '#28AC60',
+        backgroundColor: 'red',
         width: 150,
         borderRadius: 20,
         display: 'flex',
@@ -309,13 +308,14 @@ const styles = StyleSheet.create({
         height: 50,
         
         marginBottom: 5,
-        marginTop: -43
+        marginTop: -13
     },
     headerText: {
         fontSize: 16,
         marginBottom: 2,
         marginLeft:4,
         marginTop:1,
+        color:'white',
     },
     radioContainer: {
         flexDirection: 'row',
@@ -356,4 +356,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default ListingPage
+export default FruitListingPage

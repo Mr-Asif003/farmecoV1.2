@@ -10,7 +10,7 @@ const Header = ({userName}:{userName:string}) => {
     <View style={styles.Container} >
       <View style={styles.logoContainer}>
         <View style={styles.logoImageContainer}>
-          <Image source={require('@/src/assets/images/FarmecoLogo.png')} style={styles.logoImage} />
+          <Image source={require('@/src/assets/images/farmeco.png')} style={styles.logoImage} />
         </View>
         <View style={styles.avatarcontainer}>
           <TouchableOpacity>
@@ -23,7 +23,7 @@ const Header = ({userName}:{userName:string}) => {
           style={styles.button}
           onPress={() => navigation.openDrawer()} // Opens the right-side drawer
         >
-          <FontAwesome name="align-left" color="#000" size={24} />
+          <FontAwesome name="align-left" color="white" size={24} />
         </TouchableOpacity>
 
         <View style={styles.hicontainer}>
@@ -67,11 +67,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     width: 'auto',
+    
   },
   logoImageContainer: {
     margin:5,
     height: 50,
-    width: '30%'
+    width: '30%',
+    marginLeft:-25,
   },
   avatarcontainer: {
     height: 50,

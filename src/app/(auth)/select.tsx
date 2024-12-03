@@ -5,6 +5,10 @@ import { Link } from 'expo-router'
 import Account from '../(main)/farmer/(tabs)/Account';
 import CropTypeSelection from '../(main)/farmer/(productListing)/CropTypes';
 import ListingPage from '../(main)/farmer/(productListing)/ListingPage';
+import Language from '../Language';
+
+
+
 const select = () => {
   return (
     <ImageBackground source={require('../../assets/images/stylebg.png')} resizeMode="cover"  style={styles.bgContainer}>
@@ -18,6 +22,15 @@ const select = () => {
 
 <Link href={'../(main)/farmer/SelectVeg'}>go to select crops</Link>
 <Link href={'../(main)/farmer/ListingPage'}>go to listing veg</Link>
+
+<Link href={'/(auth)/register/UserRegisterDetails'}>go details</Link>
+<Link href={'/(auth)/register/RoleScreen'}>go to role</Link>
+
+<Link href={'../(main)/farmer/(productListing)/Preorder'}>go to preorder</Link>
+
+<Link href={'./trans'}>go to translation</Link>
+
+<Language/>
 
       </ImageBackground>
   )

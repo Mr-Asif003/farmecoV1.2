@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "src/app/(main)/farmer/(drawTabs)/_layout.jsx"  ]
+, "src/app/(main)/farmer/(drawTabs)/_layout.jsx", "src/app/(main)/farmer/(productListing)/MyProductsVeg.jsx", "src/app/(main)/farmer/(productListing)/MyProducts.jsx", "src/app/(main)/farmer/(productListing)/(preorder)/Preorder.jsx"  ]
 }

@@ -7,7 +7,7 @@ import { Icon } from 'lucide-react-native';
 import { View ,StyleSheet} from 'react-native';
 import TabBar from '@/src/components/atom/TabBar';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
+import Foundation from 'react-native-vector-icons/Foundation';
 
 const TabLayout=()=>{
 return(
@@ -17,11 +17,11 @@ return(
         options={{
           headerShown:false,
           title: 'Home',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+          tabBarIcon: ({ color }) => <Foundation name="home" color={color} size={34} />,
         }}/>
     <Tabs.Screen name='Categories'   options={{
           headerShown:false,
-          title: 'Sell',
+          title: 'Category',
           tabBarIcon: ({ color }) =><FontAwesome5 name="store-alt" size={24} color={color}/>,
         }}/>
     <Tabs.Screen name='Cart'  options={{

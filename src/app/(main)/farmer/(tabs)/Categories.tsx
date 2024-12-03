@@ -12,6 +12,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import CropTypeSelection from '../(productListing)/CropTypes';
 import SelectFruits from '../(productListing)/SelectFruits';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Preorder from '../(productListing)/(preorder)/Preorder';
+
+
 
 const Categories = () => {
   const router=useRouter();
@@ -71,19 +75,21 @@ const Categories = () => {
                       <TouchableOpacity style={styles.threeDotView} onPress={()=>{
                         alert('Click the plus button add your sell your product now')
                       }}>
-                        <Entypo name="dots-three-vertical" color="#000" size={24} />
+                        {/* <Entypo name="dots-three-vertical" color="#000" size={24} /> */}
                       </TouchableOpacity>
 
 
                       <TouchableOpacity style={styles.buttonView} onPress={()=>router.push('../(productListing)/SelectVeg')}>
-                      <Octicons name="plus-circle" color="#000" size={24} />
+                      <Octicons name="plus-circle" color="#000" size={30} />
                       </TouchableOpacity>
 
                     </View>
 
                   </View>
                 </View>
-                <View style={styles.iconcontainer}></View>
+                <View style={styles.iconcontainer}>
+                <Image source={require('../../../../assets/images/category1.jpg')} style={styles.btnImg}/>
+                </View>
 
               </View>
 
@@ -94,15 +100,15 @@ const Categories = () => {
                <View style={styles.sellContainer}>
                  <View style={styles.sell}>
 
-                   <View style={styles.title}><Text style={styles.titletext}>Pre   List</Text></View>
+                   <View style={styles.title}><Text style={{fontSize:20,fontWeight:'500'}}>My Products</Text></View>
                    <View style={styles.option}>
 
                      <TouchableOpacity style={styles.threeDotView}>
-                       <Entypo name="dots-three-vertical" color="#000" size={24} />
+                       {/* <Entypo name="dots-three-vertical" color="#000" size={24} /> */}
                      </TouchableOpacity>
 
 
-                     <TouchableOpacity style={styles.buttonView}>
+                     <TouchableOpacity style={styles.buttonView} onPress={()=>router.push('../(productListing)/MyProductsVeg')}>
                      <Octicons name="plus-circle" color="#000" size={24} />
                      </TouchableOpacity>
 
@@ -110,7 +116,9 @@ const Categories = () => {
 
                  </View>
                </View>
-               <View style={styles.iconcontainer}></View>
+               <View style={styles.iconcontainer}>
+               <Image source={require('../../../../assets/images/category3.jpg')} style={styles.btnImg}/>
+               </View>
 
              </View>
 
@@ -120,15 +128,15 @@ const Categories = () => {
                <View style={styles.sellContainer}>
                  <View style={styles.sell}>
 
-                   <View style={styles.title}><Text style={{fontSize:18,fontWeight:'500'}}>Your      Upcoming Delivries</Text></View>
+                   <View style={styles.title}><Text style={{fontSize:23,fontWeight:'500'}}> Pre   order's</Text></View>
                    <View style={styles.option}>
 
                      <TouchableOpacity style={styles.threeDotView}>
-                       <Entypo name="dots-three-vertical" color="#000" size={24} />
+                     
                      </TouchableOpacity>
 
 
-                     <TouchableOpacity style={styles.buttonView}>
+                     <TouchableOpacity onPress={()=>router.push('../(productListing)/(preorder)/Preorder')} style={styles.buttonView}>
 
                      </TouchableOpacity>
 
@@ -136,7 +144,9 @@ const Categories = () => {
 
                  </View>
                </View>
-               <View style={styles.iconcontainer}></View>
+               <View style={styles.iconcontainer}>
+               <Image source={require('../../../../assets/images/category2.jpg')} style={styles.btnImg2}/>
+               </View>
 
              </View>
 
@@ -146,7 +156,7 @@ const Categories = () => {
                <View style={styles.sellContainer}>
                  <View style={styles.sell}>
 
-                   <View style={styles.title}><Text style={{fontSize:23}}>My     PreLists</Text></View>
+                   <View style={styles.title}><Text style={{fontSize:18,fontWeight:'600'}}>Subscriotions Farming</Text></View>
                    <View style={styles.option}>
 
                      <TouchableOpacity style={styles.threeDotView}>
@@ -203,14 +213,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     elevation: 10,
-    margin: 5,
+    margin:0,
     marginBottom: 0,
+    marginTop:20
 
 
   },
   mainitems: {
     flex: 1,
-    margin: 10,
+    margin:1,
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -218,6 +229,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     elevation: 3,
+    padding:10
   },
   userNameContainer: {
 
@@ -262,13 +274,15 @@ fontSize:25,
   },
 
   sellContainer: {
-    marginBottom:-170,
-    height: 130,
-    width: 130,
-    backgroundColor: 'aqua',
+    marginBottom:-190,
+    height: 150,
+    width: 140,
+    backgroundColor: '#28AC60',
   
-    borderRadius: 20,
-    padding: 5
+    borderRadius: 30,
+    padding: 5,
+    opacity:0.8,
+    
   },
   sell: {
     height: '100%',
@@ -324,12 +338,31 @@ fontSize:25,
   },
   iconcontainer: {
    
-    height: 70,
-    backgroundColor: 'green',
-    width: 70,
+    height: 85,
+    backgroundColor: '#f0fff1',
+    width: 93,
     borderRadius: 50,
-
+    padding:6,
+    elevation:9,
+    shadowOffset:{height:40,width:8},
+    shadowOpacity:0.9,
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    
   },
+  btnImg:{
+    position:'absolute',
+    height:90,
+    width:100,
+    borderRadius:100,
+  },
+  btnImg2:{
+    position:'absolute',
+    height:70,
+    width:80,
+    borderRadius:100,
+  }
 
 
 

@@ -11,32 +11,20 @@ import { trendingProducts, seasonalProducts, closureImgs } from '../fdb/trending
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
-import VegTabBarOption from '@/src/components/molecules/VegTabBar';
 
-//DB
-import { SelectVegDB } from '@/src/Database/adminDB/selectVegDB';
+import MyProductTabBarOptions from '@/src/components/molecules/MyProductsTabBar';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
-//fonticon
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
-
-const SelectVeg = () => {
+const MyProductsVeg = () => {
   const navigation = useNavigation()
-  const router = useRouter();
-
+  const router = useRouter()
   //extracting name
 
   const [userName, setUserName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-
-const  passItemData=(itemId,itemRate,itemtitle)=>{
-    const details={itemId,itemRate,itemtitle}
-    router.replace({ pathname:'./ListingPage', params: details })
-  }
-
   useEffect(() => {
+
     const fetchUserData = async () => {
       const user = auth.currentUser;
       if (user) {
@@ -60,16 +48,61 @@ const  passItemData=(itemId,itemRate,itemtitle)=>{
     fetchUserData();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={()=>passItemData(item.id,item.rate,item.title)} style={styles.card} >
-      <Image source={item.image} style={styles.image} />
-      <Text style={styles.title}>{item.title}</Text>
-      <View style={styles.details} >
-        <Text style={styles.txt}>{item.id}</Text>
-        <Text style={styles.txt}>Rs:- {item.rate}</Text>
+
+  //database extracting all products
+  const [userProducts, setUserProducts] = useState([]);
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("User not authenticated");
+      return;
+    }
+
+    const userProductsRef = collection(db, "users", user.uid, "crops");
+    const q = query(userProductsRef);
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const products = [];
+      querySnapshot.forEach((doc) => {
+        products.push({ id: doc.id, ...doc.data() });
+      });
+      setUserProducts(products);
+      console.log(userProducts)
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+
+
+  const renderItem= ({ item }) => (
+    <View style={{elevation:2,borderRadius:20, backgroundColor:'#f0fff1',marginTop:10,padding:10 }}>
+       <View>
+        <Text>Product id :- {item.Pid}</Text>
       </View>
-    </TouchableOpacity>
-  );
+
+      <View style={{ marginLeft: 10 }}>
+        <Text style={styles.productName}>{item.Name}</Text>
+        <View style={{ marginLeft: 100 }}>
+          <Text style={{ fontSize:16,fontWeight:'500'}}>Price:- {item.Price}</Text>
+          <Text style={{ fontSize:16,fontWeight:'500'}}>Rating:- </Text>
+          <Text style={{ fontSize:16,fontWeight:'500'}}>Quantity:- {item.Quantity}</Text>
+          <Text style={{ fontSize:16,fontWeight:'500'}}>DOD:- {item.Dod}</Text>
+          <Text style={{ fontSize:16,fontWeight:'500'}}>Demanding Price:- {item.TotalDemandingPrice}</Text>
+        </View>
+        <View><Text>View Status</Text></View>
+      </View>
+    
+
+     
+
+
+      {/* {item.cropImage && (
+  <Image source={{ uri: item.cropImage }} style={styles.image} />
+)} */}
+  
+    </View>
+  )
 
   return (
     <View style={styles.container}>
@@ -83,42 +116,53 @@ const  passItemData=(itemId,itemRate,itemtitle)=>{
         <View>
           <View><Text style={styles.hello}> Hello {userName}</Text></View>
         </View>
-        <Text style={styles.welcome}>Welcome to the Vegetable Sell Store</Text>
+        <Text style={{ fontSize: 25, fontWeight: '600' }}>My Vegetable  Products</Text>
 
       </View>
       <View style={styles.tranButton}>
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.vegbtn}><Text style={styles.vegtxt} >Vegetables</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.fruitbtn} onPress={() => router.replace('./SelectFruits')}><Text style={styles.fruittxt} >Fruits</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.vegbtn}  ><Text style={styles.vegtxt} >Vegetables</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.fruitbtn} onPress={() => router.replace('./MyProducts')}  ><Text style={styles.fruittxt} >Fruits</Text></TouchableOpacity>
         </View>
       </View>
+
+      {/* tabbar */}
       <ScrollView>
-        <View style={styles.tabBar}><VegTabBarOption /></View>
+
+        <View style={styles.tabBar}>
+          <MyProductTabBarOptions />
+
+        </View>
+
+
+        {/* mainContainer............ */}
         <View style={styles.mainContainer}>
-          
-        <FlatList
-            data={SelectVegDB}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            horizontal={false} // Enables horizontal scrolling
-            numColumns={2}
-            showsHorizontalScrollIndicator={false} // Optional: Hides the horizontal scrollbar
-            contentContainerStyle={styles.listContainer}
-          />
-         
+
+          <View style={styles.Listcontainer}>
+            
+            {userProducts.length === 0 ? (
+              <Text style={styles.noDataText}>No products found</Text>
+            ) : (
+              <FlatList
+                data={userProducts}
+                keyExtractor={(item) => item.id}
+                renderItem={renderItem}
+              />
+            )}
+          </View>
+
+
         </View>
       </ScrollView>
-      <View style={styles.backTruck}> 
-      <TouchableOpacity style={styles.stackIcon} onPress={() => router.replace('./SelectFruits')}>
-                    <AntDesign name="leftsquare" color="green" size={44} />
-                </TouchableOpacity >
-      </View>
     </View>
-  )
+  );
+
+
 }
 
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     display: 'flex',
@@ -135,11 +179,7 @@ const styles = StyleSheet.create({
 
 
   mainContainer: {
-    height:'100%',
-    width:500,
-    display:'flex',
-  flexDirection:'row',
-  justifyContent:'center'
+
   },
   button: {
     padding: 5,
@@ -196,62 +236,49 @@ const styles = StyleSheet.create({
     height: 34,
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#b7efc5',
+    backgroundColor: '#f7cad0',
     borderRadius: 20,
     marginHorizontal: 10,
 
   },
-  card: {
-    height:175,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 16,
-    marginRight: 16, // Adds space between cards
-    width: 170, // Set a fixed width for the horizontal cards
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 1,
-    margin:10
-  },
-  image: {
-    width: '100%',
-    height: 80, // Adjust the height for horizontal layout
-    borderRadius: 8,
-    marginBottom: 12,
+  Listcontainer: {
+    flex: 1,
+    padding: 20,
   },
   title: {
-    fontSize: 19,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
   },
-  listContainer: {
-    paddingHorizontal: 10,
+  noDataText: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#888",
   },
-  details:{
-    display:'flex',
-    flexDirection:'row',
-    padding:10,
-    justifyContent:'space-between'
+  productItem: {
+    marginBottom: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 20,
+    elevation: 10,
   },
-  txt:{
-    fontSize:16,
-    fontWeight:'600'
+  productName: {
+    marginTop: 5,
+    fontSize: 25,
+    fontWeight: "bold",
+    textalign: 'center'
   },
-  backTruck:{
-    transform: [{ rotate:'3600deg' }]
+  image: {
+    width: 100,
+    height: 100,
+    marginTop: 10,
   },
-  stackIcon: {
-    height: 50,
-    
-    marginBottom: 5,
-    marginTop: -13
-},
- 
+
 
 
 
 })
 
-export default SelectVeg;
+export default MyProductsVeg;

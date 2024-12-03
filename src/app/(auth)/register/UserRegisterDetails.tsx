@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
 import React, { useState } from "react";
 import {PhoneCall, MoveRight,CircleUser,MapPinHouse } from 'lucide-react-native';
 import { Redirect, router, useRouter } from 'expo-router';
@@ -10,9 +10,13 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 // import * as ImagePicker from "expo-image-picker";
 
-
+//reanimation
+import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } from 'react-native-reanimated';
+const { width, height } = Dimensions.get('window');
 
 const UserRegisterDetails = () => {
+    const translateX = useSharedValue(0);
+    const translateY = useSharedValue(0);
     const router=useRouter();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
@@ -62,9 +66,41 @@ const UserRegisterDetails = () => {
         }
     };
 
+    //reanimation...........
+    
+  const speed = 100; // Adjust speed here
+  const diagonalDistance = Math.sqrt(width ** 2 + height ** 2);
+  const duration = (diagonalDistance / speed) * 1000; // Duration in milliseconds
+
+  React.useEffect(() => {
+    // Animate horizontally and vertically with finite time per cycle
+    translateX.value = withRepeat(
+      withTiming(100, { duration }), // Complete horizontal movement in 4 seconds
+      -1, // Infinite repetitions
+      true // Reverse direction on each cycle
+    );
+
+    translateY.value = withRepeat(
+      withTiming(100, { duration }), // Complete vertical movement in 4 seconds
+      -1, // Infinite repetitions
+      true // Reverse direction on each cycle
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateX.value },
+      { translateY: translateY.value },
+    ],
+  }));
+
     return (
         <View style={styles.container}>
-            <View style={styles.heroContainer}></View>
+             <Animated.View style={[styles.heroContainer,animatedStyle]}>
+      <Image source={require('../../../assets/images/loginbg.png')} style={styles.image} />
+      
+
+      </Animated.View>
             <View style={styles.loginContainer}>
                 {/* <Camera color="red" size={48} /> */}
                 <View style={styles.topHeading}>
@@ -159,11 +195,13 @@ const styles = StyleSheet.create({
 
     },
     heroContainer: {
-        position: 'relative',
-        display: 'flex',
-        height: '25%',
-
-    },
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+     marginLeft:50
+    
+      },
     topHeading: {
         width: "100%",
         display: "flex",
@@ -256,7 +294,32 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    image: {
+        width:"200%",
+        height:"260%",
+        resizeMode:'cover'
+      },
+      logotitle:{
+        display:'flex',
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
+    
+      },
+      logo:{
+        position:'absolute',
+        margin:5,
+        height: 50,
+        width: '30%',
+        
+      } ,
+      logoImage: {
+        display: 'flex',
+        height: '100%',
+        width: 'auto',
+        borderRadius:15
+      },
 
 
 
