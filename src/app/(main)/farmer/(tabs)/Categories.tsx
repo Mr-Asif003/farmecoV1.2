@@ -1,6 +1,6 @@
 import { FlatList, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Header from '../../../../components/molecules/Header';
+import Header from '../../../../components/molecules/header';
 
 // import auth from '../../../firebaseConfig'
 import { db, auth } from '@/src/app/firebaseConfig';
